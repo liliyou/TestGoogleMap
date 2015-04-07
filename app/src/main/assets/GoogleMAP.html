@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+    <title>Insert title here</title>
+</head>
+
+<script
+        src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+	var map;
+	function initialize() {
+		var mapOptions = {
+			zoom : 15,//地圖比例
+			center : new google.maps.LatLng(22.647443, 120.613357),//地圖預設點
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		//地圖類型
+		//ROADMAP 一般地圖
+		//HYBRID 衛星地圖 
+		//ATELLITE  衛星地圖(無顯示街道)   
+		//TERRAIN 地理地圖
+		};
+		map = new google.maps.Map(document.getElementById('NPUST_map'),
+				mapOptions);
+		mark();
+	}
+
+	//標籤
+	function mark() {
+		var myLatLng = new google.maps.LatLng(22.646938, 120.611363);
+		var myMarker = new google.maps.Marker({
+			position : myLatLng,
+			map : map,
+		});
+
+		//訊息視窗
+		var content = "訊息視窗!!!!";
+		var infowindow = new google.maps.InfoWindow({
+			content : content
+		});
+		google.maps.event.addListener(myMarker, 'click', function() {
+			infowindow.open(map, myMarker);
+		});
+	}
+</script>
+
+<body onload="initialize();">
+<form id="form1" runat="server">
+    <div id="NPUST_map" style="width: 350px; height: 500px;"></div>
+</form>
+</body>
+
+</html>
